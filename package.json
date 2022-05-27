@@ -6,9 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "engines": {
-    "node": "14.19.0"
-  },
   "author": "Drift Suttisak",
   "license": "ISC",
   "dependencies": {
