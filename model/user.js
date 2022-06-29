@@ -17,7 +17,8 @@ exports.queryAllManagerPosition = async (id) => {
   }
 };
 
-exports.queryUserById = async (userid) => {
+exports.queryUserByUserid = async (userid) => {
+  console.log(userid);
   try {
     return await pool.query("SELECT * FROM history WHERE userid = ?", [userid]);
   } catch (err) {
@@ -96,12 +97,80 @@ exports.queryUserManagerAnswerAllChoice = async ({
   }
 };
 
-// exports.queryUserByDepartment = async ({ id }) => {
-//     try {
-//         return await pool.query("SELECT * FROM history LEFT JOIN aws2 ON aws2.userid = history.userid where history.department = ? and GROUP BY aws2.userid",
-//         [department]);
-//     }
-//     catch (err) {
-//         console.log(err.message);
-//     }
-// }
+exports.deleteById = async ({ id }) => {
+  try {
+    return await pool.query("DELETE FROM history WHERE id=?;", [id]);
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+exports.deleteLoginUserByUserid = async ({ userid }) => {
+  try {
+    return await pool.query("DELETE FROM loginqt WHERE userid=?;", [userid]);
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+exports.insertUser = async ({
+  userid,
+  title_name,
+  name,
+  lastname,
+  nickname,
+  phone,
+  email,
+  department,
+  position,
+}) => {
+  try {
+    return await pool.query(
+      "INSERT INTO history (userid, title_name, name, lastname, nickname, phone, email, department, position) VALUES (?,?,?,?,?,?,?,?,?)",
+      [
+        userid,
+        title_name,
+        name,
+        lastname,
+        nickname,
+        phone,
+        email,
+        department,
+        position,
+      ]
+    );
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+exports.updateUser = async ({
+  userid,
+  title_name,
+  name,
+  lastname,
+  nickname,
+  phone,
+  email,
+  department,
+  position,
+}) => {
+  try {
+    return await pool.query(
+      "UPDATE history SET  title_name=?, name=?, lastname=?, nickname=?, phone=?, email=?, department=?, position=? WHERE userid=?",
+      [
+        title_name,
+        name,
+        lastname,
+        nickname,
+        phone,
+        email,
+        department,
+        position,
+        userid,
+      ]
+    );
+  } catch (err) {
+    console.log(err.message);
+  }
+};
