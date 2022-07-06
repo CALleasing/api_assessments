@@ -29,8 +29,10 @@ exports.postLogin = (req, res, next) => {
                   expiresIn: "1h",
                 }
               );
+              // console.log(res);
               res.status(200).json({
                 userid: row[0].userid,
+                employeeID: row[0].employeeID,
                 title_name: row[0].title_name,
                 name: row[0].name,
                 lastname: row[0].lastname,

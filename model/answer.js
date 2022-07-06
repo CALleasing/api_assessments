@@ -1,4 +1,4 @@
-const pool = require("../server/database");
+const pool = require("../server/AssessmentDatabase");
 
 exports.queryStaffQuestionWithAnswer = async ({ year, part, userid }) => {
   try {
